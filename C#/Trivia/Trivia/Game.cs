@@ -78,43 +78,38 @@ namespace Trivia
         {
             if (inPenaltyBox[currentPlayer])
             {
-                if (isGettingOutOfPenaltyBox)
-                {
-                    Console.WriteLine("Answer was correct!!!!");
-                    purses[currentPlayer]++;
-                    Console.WriteLine(players[currentPlayer]
-                            + " now has "
-                            + purses[currentPlayer]
-                            + " Gold Coins.");
-
-                    var winner = DidPlayerWin();
-                    currentPlayer++;
-                    if (currentPlayer == players.Count) currentPlayer = 0;
-
-                    return winner;
-                }
-                else
+                if (!isGettingOutOfPenaltyBox)
                 {
                     currentPlayer++;
                     if (currentPlayer == players.Count) currentPlayer = 0;
                     return true;
                 }
-            }
-            else
-            {
-                Console.WriteLine("Answer was corrent!!!!");
+
+                Console.WriteLine("Answer was correct!!!!");
                 purses[currentPlayer]++;
                 Console.WriteLine(players[currentPlayer]
-                        + " now has "
-                        + purses[currentPlayer]
-                        + " Gold Coins.");
+                                  + " now has "
+                                  + purses[currentPlayer]
+                                  + " Gold Coins.");
 
-                var winner = DidPlayerWin();
+                var winner2 = DidPlayerWin();
                 currentPlayer++;
                 if (currentPlayer == players.Count) currentPlayer = 0;
 
-                return winner;
+                return winner2;
             }
+            Console.WriteLine("Answer was corrent!!!!");
+            purses[currentPlayer]++;
+            Console.WriteLine(players[currentPlayer]
+                    + " now has "
+                    + purses[currentPlayer]
+                    + " Gold Coins.");
+
+            var winner = DidPlayerWin();
+            currentPlayer++;
+            if (currentPlayer == players.Count) currentPlayer = 0;
+
+            return winner;
         }
 
         public bool WrongAnswer()
