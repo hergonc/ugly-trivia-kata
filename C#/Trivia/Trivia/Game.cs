@@ -32,7 +32,7 @@ namespace Trivia
             }
         }
 
-        public string CreateRockQuestion(int index)
+        private string CreateRockQuestion(int index)
         {
             return "Rock Question " + index;
         }
@@ -54,7 +54,7 @@ namespace Trivia
             return true;
         }
 
-        public int HowManyPlayers()
+        private int HowManyPlayers()
         {
             return players.Count;
         }
