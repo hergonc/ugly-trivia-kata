@@ -41,37 +41,23 @@ namespace Trivia
 
             if (inPenaltyBox[currentPlayer])
             {
-                if (roll % 2 != 0)
-                {
-                    isGettingOutOfPenaltyBox = true;
-
-                    Console.WriteLine(players[currentPlayer] + " is getting out of the penalty box");
-                    places[currentPlayer] = places[currentPlayer] + roll;
-                    if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-
-                    Console.WriteLine(players[currentPlayer]
-                            + "'s new location is "
-                            + places[currentPlayer]);
-                    Console.WriteLine("The category is " + CurrentCategory());
-                    questions.AskQuestion(CurrentCategory());
-                }
-                else
+                if (roll % 2 == 0)
                 {
                     Console.WriteLine(players[currentPlayer] + " is not getting out of the penalty box");
                     isGettingOutOfPenaltyBox = false;
+                    return;
                 }
+                isGettingOutOfPenaltyBox = true;
+                Console.WriteLine(players[currentPlayer] + " is getting out of the penalty box");
             }
-            else
-            {
-                places[currentPlayer] = places[currentPlayer] + roll;
-                if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+            places[currentPlayer] += roll;
+            if (places[currentPlayer] > 11) places[currentPlayer] -= 12;
 
-                Console.WriteLine(players[currentPlayer]
-                        + "'s new location is "
-                        + places[currentPlayer]);
-                Console.WriteLine("The category is " + CurrentCategory());
-                questions.AskQuestion(CurrentCategory());
-            }
+            Console.WriteLine(players[currentPlayer]
+                              + "'s new location is "
+                              + places[currentPlayer]);
+            Console.WriteLine("The category is " + CurrentCategory());
+            questions.AskQuestion(CurrentCategory());
         }
 
         private string CurrentCategory()
