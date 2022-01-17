@@ -28,13 +28,8 @@ namespace Trivia
                 popQuestions.AddLast("Pop Question " + i);
                 scienceQuestions.AddLast(("Science Question " + i));
                 sportsQuestions.AddLast(("Sports Question " + i));
-                rockQuestions.AddLast(CreateRockQuestion(i));
+                rockQuestions.AddLast("Rock Question " + i);
             }
-        }
-
-        private string CreateRockQuestion(int index)
-        {
-            return "Rock Question " + index;
         }
 
         public void AddPlayer(string playerName)
