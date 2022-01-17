@@ -25,17 +25,13 @@ namespace Trivia
         public void AddPlayer(string playerName)
         {
             players.Add(playerName);
-            places[HowManyPlayers()] = 0;
-            purses[HowManyPlayers()] = 0;
-            inPenaltyBox[HowManyPlayers()] = false;
+            var playersCount = players.Count;
+            places[playersCount] = 0;
+            purses[playersCount] = 0;
+            inPenaltyBox[playersCount] = false;
 
             Console.WriteLine(playerName + " was added");
-            Console.WriteLine("They are player number " + players.Count);
-        }
-
-        private int HowManyPlayers()
-        {
-            return players.Count;
+            Console.WriteLine("They are player number " + playersCount);
         }
 
         public void Roll(int roll)
