@@ -84,26 +84,13 @@ namespace Trivia
                     if (currentPlayer == players.Count) currentPlayer = 0;
                     return true;
                 }
-
-                Console.WriteLine("Answer was correct!!!!");
-                purses[currentPlayer]++;
-                Console.WriteLine(players[currentPlayer]
-                                  + " now has "
-                                  + purses[currentPlayer]
-                                  + " Gold Coins.");
-
-                var winner2 = DidPlayerWin();
-                currentPlayer++;
-                if (currentPlayer == players.Count) currentPlayer = 0;
-
-                return winner2;
             }
-            Console.WriteLine("Answer was corrent!!!!");
+            Console.WriteLine("Answer was correct!!!!");
             purses[currentPlayer]++;
             Console.WriteLine(players[currentPlayer]
-                    + " now has "
-                    + purses[currentPlayer]
-                    + " Gold Coins.");
+                              + " now has "
+                              + purses[currentPlayer]
+                              + " Gold Coins.");
 
             var winner = DidPlayerWin();
             currentPlayer++;
