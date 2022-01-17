@@ -37,11 +37,6 @@ namespace Trivia
             return "Rock Question " + index;
         }
 
-        public bool IsPlayable()
-        {
-            return (HowManyPlayers() >= 2);
-        }
-
         public void AddPlayer(string playerName)
         {
             players.Add(playerName);
