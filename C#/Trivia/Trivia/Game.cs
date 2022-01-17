@@ -194,7 +194,7 @@ namespace Trivia
 
         private bool DidPlayerWin()
         {
-            return !(purses[currentPlayer] == 6);
+            return purses[currentPlayer] != 6;
         }
     }
 
