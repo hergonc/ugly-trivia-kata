@@ -13,23 +13,13 @@ namespace Trivia
 
         private readonly bool[] inPenaltyBox = new bool[6];
 
-        private readonly LinkedList<string> popQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> scienceQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> sportsQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> rockQuestions = new LinkedList<string>();
-
         private int currentPlayer;
         private bool isGettingOutOfPenaltyBox;
+        private readonly Questions questions;
 
         public Game()
         {
-            for (var i = 0; i < 50; i++)
-            {
-                popQuestions.AddLast("Pop Question " + i);
-                scienceQuestions.AddLast(("Science Question " + i));
-                sportsQuestions.AddLast(("Sports Question " + i));
-                rockQuestions.AddLast("Rock Question " + i);
-            }
+            questions = new Questions();
         }
 
         public void AddPlayer(string playerName)
@@ -67,7 +57,7 @@ namespace Trivia
                             + "'s new location is "
                             + places[currentPlayer]);
                     Console.WriteLine("The category is " + CurrentCategory());
-                    AskQuestion();
+                    questions.AskQuestion(CurrentCategory());
                 }
                 else
                 {
@@ -84,31 +74,7 @@ namespace Trivia
                         + "'s new location is "
                         + places[currentPlayer]);
                 Console.WriteLine("The category is " + CurrentCategory());
-                AskQuestion();
-            }
-        }
-
-        private void AskQuestion()
-        {
-            if (CurrentCategory() == "Pop")
-            {
-                Console.WriteLine(popQuestions.First());
-                popQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Science")
-            {
-                Console.WriteLine(scienceQuestions.First());
-                scienceQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Sports")
-            {
-                Console.WriteLine(sportsQuestions.First());
-                sportsQuestions.RemoveFirst();
-            }
-            if (CurrentCategory() == "Rock")
-            {
-                Console.WriteLine(rockQuestions.First());
-                rockQuestions.RemoveFirst();
+                questions.AskQuestion(CurrentCategory());
             }
         }
 
@@ -179,7 +145,6 @@ namespace Trivia
             if (currentPlayer == players.Count) currentPlayer = 0;
             return true;
         }
-
 
         private bool DidPlayerWin()
         {
