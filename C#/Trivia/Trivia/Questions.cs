@@ -6,48 +6,44 @@ namespace Trivia
 {
     public class Questions
     {
-        private readonly LinkedList<string> popQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> scienceQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> sportsQuestions = new LinkedList<string>();
-        private readonly LinkedList<string> rockQuestions = new LinkedList<string>();
+        private readonly Dictionary<string, Question> questions;
 
-        public Questions()
+        public Questions(string[] categories)
         {
-            CreateQuestions();
+            questions = new Dictionary<string, Question>();
+            CreateQuestions(categories);
         }
 
-        private void CreateQuestions()
+        private void CreateQuestions(string[] categories)
         {
-            for (var i = 0; i < 50; i++)
+            foreach (var category in categories)
             {
-                popQuestions.AddLast("Pop Question " + i);
-                scienceQuestions.AddLast(("Science Question " + i));
-                sportsQuestions.AddLast(("Sports Question " + i));
-                rockQuestions.AddLast("Rock Question " + i);
+                this.questions.Add(category, new Question(category));
             }
         }
 
-        public void AskQuestion(string currentCategory)
+        public void NextQuestion(string category)
         {
-            if (currentCategory == "Pop")
+            if (questions.TryGetValue(category, out var question))
+                question.NextQuestion();
+        }
+
+        private class Question
+        {
+            private readonly string category;
+            private readonly LinkedList<string> items;
+
+            public Question(string category)
             {
-                Console.WriteLine(popQuestions.First());
-                popQuestions.RemoveFirst();
+                this.category = category;
+                items = new LinkedList<string>();
+                for (var i = 0; i < 50; i++) items.AddLast($"{category} Question {i}");
             }
-            if (currentCategory == "Science")
+
+            public void NextQuestion()
             {
-                Console.WriteLine(scienceQuestions.First());
-                scienceQuestions.RemoveFirst();
-            }
-            if (currentCategory == "Sports")
-            {
-                Console.WriteLine(sportsQuestions.First());
-                sportsQuestions.RemoveFirst();
-            }
-            if (currentCategory == "Rock")
-            {
-                Console.WriteLine(rockQuestions.First());
-                rockQuestions.RemoveFirst();
+                Console.WriteLine(items.First());
+                items.RemoveFirst();
             }
         }
     }
