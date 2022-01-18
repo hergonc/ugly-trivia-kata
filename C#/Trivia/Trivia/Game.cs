@@ -28,19 +28,17 @@ namespace Trivia
 
         public void Roll(int roll)
         {
-            players.NextPlayer();
             Console.WriteLine(players.CurrentPlayerName() + " is the current player");
             Console.WriteLine("They have rolled a " + roll);
 
             if (players.CurrentPlayerInPenaltyBox())
             {
-                if (roll % 2 == 0)
+                isGettingOutOfPenaltyBox = roll % 2 != 0;
+                if (!isGettingOutOfPenaltyBox)
                 {
                     Console.WriteLine(players.CurrentPlayerName() + " is not getting out of the penalty box");
-                    isGettingOutOfPenaltyBox = false;
                     return;
                 }
-                isGettingOutOfPenaltyBox = true;
                 Console.WriteLine(players.CurrentPlayerName() + " is getting out of the penalty box");
             }
             players.IncreaseCurrentPlayerPlace(roll);
@@ -55,6 +53,7 @@ namespace Trivia
         {
             if (players.CurrentPlayerInPenaltyBox() && !isGettingOutOfPenaltyBox)
             {
+                players.NextPlayer();
                 return;
             }
             Console.WriteLine("Answer was correct!!!!");
@@ -63,6 +62,7 @@ namespace Trivia
                               + " now has "
                               + players.CurrentPlayerPoints()
                               + " Gold Coins.");
+            players.NextPlayer();
         }
 
         public void WrongAnswer()
@@ -70,6 +70,7 @@ namespace Trivia
             Console.WriteLine("Question was incorrectly answered");
             Console.WriteLine(players.CurrentPlayerName() + " was sent to the penalty box");
             players.CurrentPlayerGoToPenaltyBox();
+            players.NextPlayer();
         }
 
         public bool DidPlayerWin()
